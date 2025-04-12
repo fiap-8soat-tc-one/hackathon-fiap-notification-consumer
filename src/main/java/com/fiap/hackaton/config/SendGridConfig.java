@@ -1,4 +1,4 @@
-package com.example.notifier.config;
+package com.fiap.hackaton.config;
 
 import com.sendgrid.SendGrid;
 import org.springframework.beans.factory.annotation.Value;

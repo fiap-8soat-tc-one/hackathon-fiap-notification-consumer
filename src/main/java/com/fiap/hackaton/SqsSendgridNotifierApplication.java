@@ -1,4 +1,4 @@
-package com.example.notifier;
+package com.fiap.hackaton;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
