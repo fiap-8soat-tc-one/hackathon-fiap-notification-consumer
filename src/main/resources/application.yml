@@ -1,15 +1,20 @@
-aws:
-  sqs:
-    queue-url: http://localhost:4566/000000000000/email-queue
-    region: us-east-1
-  credentials:
-    access-key: test
-    secret-key: test
+spring:
+  application:
+    name: notification-consumer
+  profiles:
+    active: local
 
+  cloud:
+    aws:
+      sqs:
+        region: ${AWS_REGION:us-east-1}
+        endpoint: ${SQS_ENDPOINT:http://localhost:4566}
+
+app:
+  message-broker:
+    event:
+      notification:
+        queue-name: notification-event-queue
 sendgrid:
   api-key: ${SENDGRID_API_KEY}
   from-email: notificacoes@seudominio.com
-
-spring:
-  main:
-    allow-bean-definition-overriding: true

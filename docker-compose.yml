@@ -2,17 +2,48 @@ version: '3.8'
 
 services:
   localstack:
-    image: localstack/localstack:3.0
-    container_name: localstack
+    container_name: "${LOCALSTACK_DOCKER_NAME-localstack-hackaton}"
+    image: localstack/localstack
     ports:
-      - "4566:4566"
+      - "127.0.0.1:4566:4566"            # LocalStack Gateway https://app.localstack.cloud
+      - "127.0.0.1:4510-4559:4510-4559"  # external services port range
     environment:
-      - SERVICES=sqs
-      - EDGE_PORT=4566
-      - AWS_DEFAULT_REGION=us-east-1
+      - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION:-us-east-1}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID:-fakeAccessKeyId}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY:-fakeSecretAccessKey}
+      - DEFAULT_REGION=${AWS_DEFAULT_REGION:-us-east-1}
+      - MAIN_CONTAINER_NAME=${LOCALSTACK_DOCKER_NAME-localstack-hackaton}
     volumes:
-      - ./init:/etc/localstack/init/ready.d
-      - localstack-data:/var/lib/localstack
+      - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -s http://localhost:4566 > /dev/null 2>&1 || exit 1" ]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+    networks:
+      - localstack-network
 
-volumes:
-  localstack-data:
+  hackaton-notification-consumer:
+    depends_on:
+      localstack:
+        condition: service_healthy
+    build:
+      context: .
+    container_name: hackaton-notification-consumer
+    ports:
+      - 8080:8080
+    restart: always
+    environment:
+      - AWS_REGION=${AWS_REGION:-us-east-1}
+      - SQS_ENDPOINT=http://localstack:4566
+      - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION:-us-east-1}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID:-fakeAccessKeyId}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY:-fakeSecretAccessKey}
+      - DEFAULT_REGION=${AWS_DEFAULT_REGION:-us-east-1}
+      - SENDGRID_API_KEY=${SENDGRID_API_KEY:-fakeSendGridApiKey}
+    networks:
+      - localstack-network
+networks:
+  localstack-network:
+    driver: bridge

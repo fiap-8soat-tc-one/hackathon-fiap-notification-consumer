@@ -1,4 +1,4 @@
-package com.example.notifier.model;
+package com.fiap.hackaton.model;
 
 import lombok.Data;
 
