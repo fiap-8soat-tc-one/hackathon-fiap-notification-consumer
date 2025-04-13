@@ -1,4 +1,4 @@
-package com.fiap.hackaton;
+package com.fiap.hackathon;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

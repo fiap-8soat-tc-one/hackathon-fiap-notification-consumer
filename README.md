@@ -70,5 +70,5 @@ src/
 ---
 
 ## ✉️ Contato
-Para dúvidas ou sugestões, entre em contato com o time técnico responsável pelo Hackaton FIAP.
+Para dúvidas ou sugestões, entre em contato com o time técnico responsável pelo hackathon FIAP.
 

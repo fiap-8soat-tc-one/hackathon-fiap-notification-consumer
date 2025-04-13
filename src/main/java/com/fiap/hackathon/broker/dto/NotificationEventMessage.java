@@ -1,4 +1,4 @@
-package com.fiap.hackaton.broker.dto;
+package com.fiap.hackathon.broker.dto;
 
 import lombok.Data;
 

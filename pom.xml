@@ -8,11 +8,11 @@
         <version>3.2.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.fiap.hackaton</groupId>
+    <groupId>com.fiap.hackathon</groupId>
     <artifactId>notification-consumer</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>hackathon-notification-consumer</name>
-    <description>Fiap Hackaton 8SOAT Notification Consumer</description>
+    <description>Fiap hackathon 8SOAT Notification Consumer</description>
     <url/>
     <licenses>
         <license/>

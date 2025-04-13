@@ -1,4 +1,4 @@
-package com.fiap.hackaton.config;
+package com.fiap.hackathon.config;
 
 import com.sendgrid.SendGrid;
 import org.springframework.beans.factory.annotation.Value;
