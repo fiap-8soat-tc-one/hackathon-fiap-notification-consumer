@@ -1,4 +1,4 @@
-package com.fiap.hackaton.model;
+package com.fiap.hackathon.model;
 
 import lombok.Data;
 

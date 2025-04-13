@@ -1,6 +1,6 @@
-package com.fiap.hackaton.broker.consumer;
+package com.fiap.hackathon.broker.consumer;
 
-import com.fiap.hackaton.broker.dto.NotificationEventMessage;
+import com.fiap.hackathon.broker.dto.NotificationEventMessage;
 import io.awspring.cloud.sqs.annotation.SqsListener;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

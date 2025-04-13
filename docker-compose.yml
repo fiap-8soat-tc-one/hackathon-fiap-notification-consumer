@@ -1,8 +1,6 @@
-version: '3.8'
-
 services:
   localstack:
-    container_name: "${LOCALSTACK_DOCKER_NAME-localstack-hackaton}"
+    container_name: "${LOCALSTACK_DOCKER_NAME-localstack-hackathon}"
     image: localstack/localstack
     ports:
       - "127.0.0.1:4566:4566"            # LocalStack Gateway https://app.localstack.cloud
@@ -12,7 +10,7 @@ services:
       - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID:-fakeAccessKeyId}
       - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY:-fakeSecretAccessKey}
       - DEFAULT_REGION=${AWS_DEFAULT_REGION:-us-east-1}
-      - MAIN_CONTAINER_NAME=${LOCALSTACK_DOCKER_NAME-localstack-hackaton}
+      - MAIN_CONTAINER_NAME=${LOCALSTACK_DOCKER_NAME-localstack-hackathon}
     volumes:
       - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock"
@@ -24,13 +22,13 @@ services:
     networks:
       - localstack-network
 
-  hackaton-notification-consumer:
+  hackathon-notification-consumer:
     depends_on:
       localstack:
         condition: service_healthy
     build:
       context: .
-    container_name: hackaton-notification-consumer
+    container_name: hackathon-notification-consumer
     ports:
       - 8080:8080
     restart: always

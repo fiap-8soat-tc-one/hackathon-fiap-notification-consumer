@@ -1,6 +1,6 @@
-package com.fiap.hackaton.service;
+package com.fiap.hackathon.service;
 
-import com.fiap.hackaton.model.EmailNotification;
+import com.fiap.hackathon.model.EmailNotification;
 import com.sendgrid.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
