@@ -26,17 +26,23 @@ public class NotificationService {
         EmailNotification emailNotification = new EmailNotification();
         emailNotification.setTo(uploadEntity.getEmail());
         emailNotification.setBody(buildEmailContent(uploadEntity));
-        emailNotification.setSubject("File Processed Successfully");
+        emailNotification.setSubject("Processamento de video concluido");
         emailService.sendEmail(emailNotification);
         uploadEntity.setStatusUpload(UploadStatus.NOTIFIED.name());
         uploadsRepository.save(uploadEntity);
     }
 
     private String buildEmailContent(Uploads uploadEntity) {
-        return "Hello,\n\n" +
-                "Your upload " + uploadEntity.getId() + " has been processed successfully" + "\n\n" +
-                "Use the following link to download the zip file containing the screenshots:\n" +
-                uploadEntity.getUrlDownload() + "\n\n" +
-                "Thank you for using our service!\n";
+        StringBuilder result = new StringBuilder("Olá,\n\n" +
+                "Seu video " + uploadEntity.getId() + " foi processado com o status " + uploadEntity.getStatusUpload() + "\n\n");
+
+        if (uploadEntity.getStatusUpload()            .equals(UploadStatus.PROCESSED.name())) {
+            result.append("Use o link a seguir para realizar o download do arquivo zip contendo os screenshots:\n");
+            result.append(uploadEntity.getUrlDownload()).append("\n\n");
+        } else {
+            result.append("Ocorreu um erro durante o processamento. Por favor, contate o time de suporte.\n\n");
+        }
+        result.append("Obrigado por utilizar nosso servico!\n");
+        return result.toString();
     }
 }
