@@ -11,7 +11,7 @@
     <groupId>com.fiap.hackathon</groupId>
     <artifactId>notification-consumer</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>hackathon-notification-consumer</name>
+    <name>notification-consumer</name>
     <description>Fiap hackathon 8SOAT Notification Consumer</description>
     <url/>
     <licenses>
@@ -54,6 +54,12 @@
         <dependency>
             <groupId>io.awspring.cloud</groupId>
             <artifactId>spring-cloud-aws-starter</artifactId>
+        </dependency>
+
+        <!-- Dynamo -->
+        <dependency>
+            <groupId>io.awspring.cloud</groupId>
+            <artifactId>spring-cloud-aws-starter-dynamodb</artifactId>
         </dependency>
 
         <!-- SendGrid -->

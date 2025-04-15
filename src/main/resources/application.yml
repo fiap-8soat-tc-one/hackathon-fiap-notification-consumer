@@ -9,6 +9,10 @@ spring:
       sqs:
         region: ${AWS_REGION:us-east-1}
         endpoint: ${SQS_ENDPOINT:http://localhost:4566}
+      dynamodb:
+        region: ${AWS_REGION:us-east-1}
+        endpoint: ${DYNAMO_DB_ENDPOINT:https://localhost.localstack.cloud:4566}
+        table-prefix: fiap-hackaton-
 
 app:
   message-broker:
@@ -17,4 +21,4 @@ app:
         queue-name: notification-event-queue
 sendgrid:
   api-key: ${SENDGRID_API_KEY}
-  from-email: notificacoes@seudominio.com
+  from-email: ${SENDGRID_FROM_EMAIL}

@@ -7,6 +7,7 @@ COPY src /app/src
 RUN mvn clean package -DskipTests
 
 FROM openjdk:21-jdk-slim AS deploy
+WORKDIR /app
 
 LABEL org.opencontainers.image.title="hackathon Fiap Notification Consumer"
 LABEL org.opencontainers.image.description="hackathon Fiap Notification Consumer 8SOAT"
@@ -16,6 +17,6 @@ LABEL org.opencontainers.image.source="https://github.com/fiap-8soat-tc-one/hack
 LABEL org.opencontainers.image.authors="FIAP 8SOAT TEAM 32"
 LABEL org.opencontainers.image.licenses="GNU General Public License v3.0"
 
-COPY --from=app-build /app/target/*.jar /app/hackathon-notification-consumer.jar
+COPY --from=app-build /app/target/*.jar /app/notification-consumer.jar
 
-ENTRYPOINT ["java", "-jar", "hackathon-notification-consumer.jar"]
+ENTRYPOINT ["java", "-jar", "notification-consumer.jar"]
