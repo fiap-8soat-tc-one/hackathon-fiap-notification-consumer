@@ -1,4 +1,4 @@
-package com.fiap.hackathon.config;
+package com.fiap.hackathon.infrastructure.core.config;
 
 import com.sendgrid.SendGrid;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,6 +13,7 @@ public class SendGridConfig {
 
     @Bean
     public SendGrid sendGrid() {
+        System.out.println("SendGrid API Key: " + apiKey); // Log the API key for debugging
         return new SendGrid(apiKey);
     }
 }
