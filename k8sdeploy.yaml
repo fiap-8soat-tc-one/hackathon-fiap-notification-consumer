@@ -62,7 +62,7 @@ spec:
                   name: app-secrets
                   key: sendgrid-api-key
             - name: SENDGRID_FROM_EMAIL
-              value: jean.carlos@5by5.com.br
+              value: "jc_mds@outlook.com"
       restartPolicy: Always
   strategy:
     type: RollingUpdate
@@ -87,7 +87,7 @@ metadata:
   namespace: fiap
 type: Opaque
 data:
-  sendgrid-api-key: U0cuVWxueHUzNkpRbVd6Q3lUeHRlenlKdy5TSHJGdTNheHZBRnZfd0NOTlRBeWl1eEJyanA3WTI3WF9ycjBzVGRrMm9F
+  sendgrid-api-key: U0cudXZHQnN6QXlRQUtSQUduM3BQWmRQUS4zT2IwZFg4YmVhTnhKdTMtamZVbGotNmgyVTJFNWtpNzlHT1Q3bF9Lbnpv
 ---
 apiVersion: keda.sh/v1alpha1
 kind: TriggerAuthentication
