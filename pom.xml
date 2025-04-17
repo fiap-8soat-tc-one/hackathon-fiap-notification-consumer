@@ -16,7 +16,9 @@
     <description>Fiap hackathon 8SOAT Notification Consumer</description>
 
     <properties>
-        <java.version>23</java.version>
+        <java.version>21</java.version>
+        <sonar.organization>fiap-8soat-tc-one</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -36,6 +38,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+    
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
