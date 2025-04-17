@@ -1,4 +1,6 @@
 # Notification Consumer 🚀
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fiap-8soat-tc-one_hackathon-fiap-notification-consumer&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=fiap-8soat-tc-one_hackathon-fiap-notification-consumer)
+[![Build and Publish image to ECR](https://github.com/fiap-8soat-tc-one/hackathon-fiap-notification-consumer/actions/workflows/build.yml/badge.svg)](https://github.com/fiap-8soat-tc-one/hackathon-fiap-notification-consumer/actions/workflows/build.yml)
 
 ## 📘 Visão Geral
 
