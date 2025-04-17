@@ -1,84 +1,197 @@
-# Notification Consumer 🚀
+# Notification Consumer - FIAP Hackathon 🚀
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fiap-8soat-tc-one_hackathon-fiap-notification-consumer&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=fiap-8soat-tc-one_hackathon-fiap-notification-consumer)
 [![Build and Publish image to ECR](https://github.com/fiap-8soat-tc-one/hackathon-fiap-notification-consumer/actions/workflows/build.yml/badge.svg)](https://github.com/fiap-8soat-tc-one/hackathon-fiap-notification-consumer/actions/workflows/build.yml)
 
 ## 📘 Visão Geral
 
-Este repositório contém uma aplicação **Spring Boot**, empacotada com **Docker**, que atua como consumer de mensagens do
-Amazon SQS, processando notificações e enviando e-mails através do SendGrid.
+Este projeto é um microsserviço de notificações desenvolvido para o Hackathon FIAP, responsável por processar eventos de notificação via Amazon SQS e enviar e-mails usando o SendGrid. O serviço faz parte de uma arquitetura maior que processa uploads de vídeos e notifica os usuários sobre o status do processamento.
 
----
+## 🛠️ Tecnologias Utilizadas
 
-## 🔐 Por que usar o SendGrid?
+### Core
+- **Java 21**
+- **Spring Boot 3.2.3**
+- **Maven 3.9.9**
 
-O **SendGrid** é um serviço de envio de e-mails que pode ser usado para campanhas de marketing, e-mails transacionais e
-outros. É uma boa opção para empresas de todos os portes, desde startups até multinacionais, entre as principais
-vantagens estão:
+### AWS Services
+- **Amazon SQS** - Serviço de filas para processamento de mensagens
+- **Amazon DynamoDB** - Banco de dados NoSQL para armazenamento de dados
+- **Amazon ECR** - Registro de containers para imagens Docker
 
-- ✅ **Suporte**: O SendGrid está disponível em todo o mundo
-- ✅ **Escalabilidade**: Serve para empresas de todos os portes, desde startups até multinacionais
-- ✅ **Análise em tempo real**: O SendGrid oferece análise personalizável e em tempo real
-- ✅ **API**: O SendGrid oferece uma API que permite enviar e-mails em grande escala
-- ✅ **Testes A/B**: O SendGrid permite realizar testes A/B para melhorar o relacionamento com os clientes
+### Outros
+- **SendGrid** - Serviço de envio de e-mails
+- **Docker** - Containerização da aplicação
+- **Kubernetes** - Orquestração de containers
+- **LocalStack** - Emulação de serviços AWS localmente
+- **JaCoCo** - Cobertura de testes
+- **SonarQube** - Análise de qualidade de código
+- **GitHub Actions** - CI/CD
 
----
+## 🏗️ Arquitetura do Projeto
 
-## ☕ Por que usar uma App Spring Boot ?
-
-Análisamos a possibilidade de utilizar **Amazon SNS** com **AWS Lambda**, mas isso demandaria mais recursos e tornaria a
-solução mais complexa em termos de infraestrutura, por isso optamos por fazer uma aplicaçào Spring Boot com todas as
-dependências carregadas via Maven.
-
-## 🧪 Estrutura do Projeto
-
-```bash
+### Estrutura de Pacotes
+```
 src/
 ├── main/
-│   ├── java/
-│   │   └── com.seuprojeto.notifier/
-│   │       ├── config/       # Configurações AWS e SendGrid
-│   │       ├── listener/     # Listener do SQS
-│   │       ├── service/      # Serviço de envio de e-mail
-│   │       └── model/        # Modelos de dados
+│   ├── java/com/fiap/hackaton/
+│   │   ├── core/
+│   │   │   ├── domain/
+│   │   │   │   ├── entities/      # Entidades do domínio
+│   │   │   │   └── exceptions/    # Exceções customizadas
+│   │   │   └── usecases/          # Casos de uso da aplicação
+│   │   ├── infrastructure/
+│   │   │   ├── gateways/          # Implementações de interfaces externas
+│   │   │   ├── messaging/         # Consumidores de mensagens
+│   │   │   ├── model/            # DTOs e modelos
+│   │   │   └── persistence/      # Repositórios
+│   │   └── service/              # Serviços da aplicação
 │   └── resources/
-│       └── application.yml
-
----
-
-## 🔄 Fluxo de Funcionamento
-
-1. Mensagem é recebida via SQS após processamento do(s) vídeo(s)
-2. Notification Consumer recebe a mensagem envia um email via SendGrid
-
----
-
-## 📎 Exemplo de Request Payload JSON
-```json
-{
-  "to": "usuario@exemplo.com",
-  "subject": "Nova notificação",
-  "body": "Olá! Esta é uma notificação enviada via SendGrid."
-}
+│       └── application.yml       # Configurações da aplicação
 ```
 
-### ▶️ Rodando a aplicação localmente
+## 🔄 Fluxo da Aplicação
 
+```mermaid
+graph LR
+    A[Upload Service] -->|Envia Mensagem| B[SQS Queue]
+    B -->|Consome Mensagem| C[Notification Consumer]
+    C -->|Busca Dados| D[DynamoDB]
+    C -->|Envia Email| E[SendGrid]
+```
+
+## 📊 Diagrama de Classes Principal
+
+```mermaid
+classDiagram
+    class NotificationService {
+        -NotifyUserUseCaseSpec notifyUserUseCase
+        +processNotification(NotificationEventMessage)
+    }
+    
+    class SQSNotificationConsumer {
+        -NotificationService notificationService
+        +listen(NotificationEventMessage)
+    }
+    
+    class NotifyUserUseCase {
+        -UploadsRepository uploadRepository
+        -EmailGatewaySpec emailGateway
+        +execute(String uploadId)
+    }
+    
+    class SendGridEmailGateway {
+        -SendGrid sendGrid
+        -String fromEmail
+        +send(Email email)
+    }
+    
+    NotificationService --> NotifyUserUseCase
+    SQSNotificationConsumer --> NotificationService
+    NotifyUserUseCase --> SendGridEmailGateway
+```
+
+## 🚀 Como Executar
+
+### Pré-requisitos
+- Java 21
+- Maven 3.9+
+- Docker & Docker Compose
+- AWS CLI (para testes locais com LocalStack)
+
+### Configuração Local
+
+1. Clone o repositório
+```bash
+git clone https://github.com/seu-usuario/hackathon-fiap-notification-consumer.git
+cd hackathon-fiap-notification-consumer
+```
+
+2. Configure as variáveis de ambiente
+```bash
+export AWS_ACCESS_KEY_ID=your_access_key
+export AWS_SECRET_ACCESS_KEY=your_secret_key
+export AWS_REGION=us-east-1
+export SENDGRID_API_KEY=your_sendgrid_key
+export SENDGRID_FROM_EMAIL=your_email
+```
+
+3. Execute com Docker Compose
+```bash
+docker-compose up -d
+```
+
+4. Execute a aplicação
 ```bash
 ./mvnw spring-boot:run
 ```
 
----
+## 📧 Formato das Mensagens
 
-## ✅ Requisitos
+### Mensagem SQS de Entrada
+```json
+{
+    "id": "uuid-do-upload",
+    "status": "PROCESSED",
+    "message": "Processamento concluído"
+}
+```
 
-- Java 17+
-- Maven
-- Conta na AWS com acesso à SQS
-- Conta SendGrid com API Key válida
+### Email de Saída
+- **Assunto**: "Processamento de video concluido"
+- **Corpo**: Inclui status do processamento e link para download (se disponível)
 
----
+## 🔍 Testes
+
+```bash
+# Executar todos os testes
+mvn test
+
+# Executar testes com cobertura
+mvn verify
+```
+
+## 📦 Deploy
+
+O deploy é realizado automaticamente via GitHub Actions quando há push na branch main:
+
+1. Build e testes
+2. Análise de código com SonarQube
+3. Build da imagem Docker
+4. Push para Amazon ECR
+5. Deploy no EKS
+
+## ⚙️ Configurações
+
+### application.yml
+```yaml
+spring:
+  application:
+    name: notification-consumer
+
+aws:
+  region: ${AWS_REGION:us-east-1}
+  sqs:
+    queue-url: ${SQS_QUEUE_URL}
+  dynamodb:
+    table-name: ${DYNAMODB_TABLE}
+
+sendgrid:
+  api-key: ${SENDGRID_API_KEY}
+  from-email: ${SENDGRID_FROM_EMAIL}
+```
+
+## 🤝 Contribuições
+
+1. Fork o projeto
+2. Crie uma branch (`git checkout -b feature/amazing-feature`)
+3. Commit suas mudanças (`git commit -m 'Add amazing feature'`)
+4. Push para a branch (`git push origin feature/amazing-feature`)
+5. Abra um Pull Request
+
+## 📝 Licença
+
+Este projeto está sob a licença GNU General Public License v3.0.
 
 ## ✉️ Contato
 
-Para dúvidas ou sugestões, entre em contato com o time técnico responsável pelo hackathon FIAP.
-
+Para dúvidas ou sugestões, entre em contato com o time técnico do FIAP 8SOAT TEAM 32.
