@@ -17,10 +17,10 @@ public class SendGridEmailGateway implements EmailGatewaySpec {
     private final String fromEmail;
 
     public SendGridEmailGateway(
-        @Value("${sendgrid.api-key}") String apiKey,
-        @Value("${sendgrid.email.from}") String fromEmail
+        @Value("${sendgrid.email.from}") String fromEmail,
+        SendGrid sendGrid
     ) {
-        this.sendGrid = new SendGrid(apiKey);
+        this.sendGrid = sendGrid;
         this.fromEmail = fromEmail;
     }
 
