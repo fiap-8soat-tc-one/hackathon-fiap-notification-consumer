@@ -1,4 +1,4 @@
-package com.fiap.hackaton.infrastructure.messaging.consumers;
+package com.fiap.hackaton.infrastructure.presentation.workers.consumers;
 
 import com.fiap.hackaton.core.domain.exceptions.NotificationException;
 import com.fiap.hackaton.infrastructure.presentation.workers.dto.NotificationEventMessage;

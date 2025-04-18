@@ -1,6 +1,6 @@
-package com.fiap.hackathon.infrastructure.gateways;
+package com.fiap.hackaton.infrastructure.gateways;
 
-import com.fiap.hackathon.fixture.FixtureTest;
+import com.fiap.hackaton.fixture.FixtureTest;
 import com.fiap.hackaton.core.domain.entities.Email;
 import com.fiap.hackaton.core.domain.exceptions.NotificationException;
 import com.fiap.hackaton.infrastructure.gateways.SendGridEmailGateway;

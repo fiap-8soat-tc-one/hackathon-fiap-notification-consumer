@@ -1,9 +1,8 @@
-package com.fiap.hackathon.core.usecases.notification;
+package com.fiap.hackaton.core.usecases.notification;
 
-import com.fiap.hackathon.fixture.FixtureTest;
+import com.fiap.hackaton.fixture.FixtureTest;
 import com.fiap.hackaton.core.domain.entities.Email;
 import com.fiap.hackaton.core.domain.exceptions.NotificationException;
-import com.fiap.hackaton.core.usecases.notification.NotifyUserUseCase;
 import com.fiap.hackaton.core.usecases.notification.ports.EmailGatewaySpec;
 import com.fiap.hackaton.domain.enums.UploadStatus;
 import com.fiap.hackaton.infrastructure.persistence.repositories.UploadsRepository;

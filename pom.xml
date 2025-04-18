@@ -182,15 +182,12 @@
                 <version>0.8.12</version>
                 <configuration>
                     <includes>
-                        <include>com/fiap/tc/application/usecases/**/*</include>
-                        <include>com/fiap/tc/infrastructure/gateways/**</include>
-                        <include>com/fiap/tc/infrastructure/services/**</include>
-                        <include>com/fiap/tc/infrastructure/persistence/repositories/**</include>
-                        <include>com/fiap/tc/infrastructure/presentation/workers/consumers/**</include>
+                        <include>com/fiap/hackaton/core/usecases/**</include>
+                        <include>com/fiap/hackaton/infrastructure/gateways/**</include>
+                        <include>com/fiap/hackaton/infrastructure/services/**</include>
+                        <include>com/fiap/hackaton/infrastructure/persistence/repositories/**</include>
+                        <include>com/fiap/hackaton/infrastructure/presentation/workers/consumers/**</include>
                     </includes>
-                    <excludes>
-                        <exclude>com/fiap/tc/infrastructure/gateways/mappers/**/*</exclude>
-                    </excludes>
                 </configuration>
                 <executions>
                     <execution>

@@ -1,6 +1,6 @@
-package com.fiap.hackathon.service;
+package com.fiap.hackaton.service;
 
-import com.fiap.hackathon.fixture.FixtureTest;
+import com.fiap.hackaton.fixture.FixtureTest;
 import com.fiap.hackaton.core.usecases.notification.NotifyUserUseCaseSpec;
 import com.fiap.hackaton.core.domain.exceptions.NotificationException;
 import com.fiap.hackaton.infrastructure.presentation.workers.dto.NotificationEventMessage;

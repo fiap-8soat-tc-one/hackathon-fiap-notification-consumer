@@ -1,4 +1,4 @@
-package com.fiap.hackathon.fixture.templates;
+package com.fiap.hackaton.fixture.templates;
 
 import br.com.six2six.fixturefactory.loader.TemplateLoader;
 
