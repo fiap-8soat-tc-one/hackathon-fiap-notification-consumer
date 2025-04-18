@@ -1,10 +1,9 @@
-package com.fiap.hackaton.service;
+package com.fiap.hackaton.infrastructure.services;
 
 import com.fiap.hackaton.fixture.FixtureTest;
 import com.fiap.hackaton.core.usecases.notification.NotifyUserUseCaseSpec;
 import com.fiap.hackaton.core.domain.exceptions.NotificationException;
 import com.fiap.hackaton.infrastructure.presentation.workers.dto.NotificationEventMessage;
-import com.fiap.hackaton.service.NotificationService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

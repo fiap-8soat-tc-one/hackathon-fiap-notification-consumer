@@ -3,7 +3,7 @@ package com.fiap.hackaton.infrastructure.messaging.consumers;
 import com.fiap.hackaton.core.domain.exceptions.NotificationException;
 import com.fiap.hackaton.infrastructure.presentation.workers.consumers.SQSNotificationConsumer;
 import com.fiap.hackaton.infrastructure.presentation.workers.dto.NotificationEventMessage;
-import com.fiap.hackaton.service.NotificationService;
+import com.fiap.hackaton.infrastructure.services.NotificationService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;

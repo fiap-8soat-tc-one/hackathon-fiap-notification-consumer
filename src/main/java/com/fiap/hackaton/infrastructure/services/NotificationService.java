@@ -1,4 +1,4 @@
-package com.fiap.hackaton.service;
+package com.fiap.hackaton.infrastructure.services;
 
 import com.fiap.hackaton.core.usecases.notification.NotifyUserUseCaseSpec;
 import com.fiap.hackaton.infrastructure.presentation.workers.dto.NotificationEventMessage;
