@@ -33,22 +33,25 @@ Este projeto é um microsserviço de notificações desenvolvido para o Hackatho
 ```
 src/
 ├── main/
-│   ├── java/com/fiap/hackaton/
-│   │   ├── core/
-│   │   │   ├── domain/
-│   │   │   │   ├── entities/       # Entidades do domínio
-│   │   │   │   └── exceptions/     # Exceções customizadas
-│   │   │   └── usecases/           # Casos de uso da aplicação
-│   │   ├── infrastructure/
-│   │   │   ├── gateways/           # Implementações de interfaces externas
-│   │   │   ├── messaging/          # Consumidores de mensagens
-│   │   │   ├── model/              # DTOs e modelos
-│   │   │   ├── persistence/        # Repositórios
-│   │   │   └── workers/            # Workers para processamento
-│   │   │       └── dto/            # Objetos de transferência de dados
-│   │   └── service/                # Serviços da aplicação
+│   ├── java/
+│   │   └── com/
+│   │       └── fiap/
+│   │           └── hackaton/
+│   │               ├── core/
+│   │               │   ├── domain/
+│   │               │   │   ├── entities/       # Domain entities
+│   │               │   │   └── exceptions/     # Custom exceptions
+│   │               │   └── usecases/           # Application use cases
+│   │               ├── infrastructure/
+│   │               │   ├── gateways/           # External interface implementations
+│   │               │   ├── messaging/          # Message consumers
+│   │               │   ├── model/              # DTOs and models
+│   │               │   ├── persistence/        # Repositories
+│   │               │   └── workers/            # Processing workers
+│   │               │       └── dto/            # Data transfer objects
+│   │               └── services/               # Application services
 │   └── resources/
-│       └── application.yml         # Configurações da aplicação
+│       └── application.yml                     # Application configurations
 ```
 
 ## 🔄 Fluxo da Aplicação
