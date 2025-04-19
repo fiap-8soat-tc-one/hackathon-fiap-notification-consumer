@@ -1,8 +1,8 @@
-package com.fiap.hackaton.infrastructure.messaging.consumers;
+package com.fiap.hackaton.infrastructure.presentation.workers.consumers;
 
 import com.fiap.hackaton.core.domain.exceptions.NotificationException;
 import com.fiap.hackaton.infrastructure.presentation.workers.dto.NotificationEventMessage;
-import com.fiap.hackaton.service.NotificationService;
+import com.fiap.hackaton.infrastructure.services.NotificationService;
 import io.awspring.cloud.sqs.annotation.SqsListener;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

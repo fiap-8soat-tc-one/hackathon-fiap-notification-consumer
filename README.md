@@ -33,20 +33,25 @@ Este projeto é um microsserviço de notificações desenvolvido para o Hackatho
 ```
 src/
 ├── main/
-│   ├── java/com/fiap/hackaton/
-│   │   ├── core/
-│   │   │   ├── domain/
-│   │   │   │   ├── entities/      # Entidades do domínio
-│   │   │   │   └── exceptions/    # Exceções customizadas
-│   │   │   └── usecases/          # Casos de uso da aplicação
-│   │   ├── infrastructure/
-│   │   │   ├── gateways/          # Implementações de interfaces externas
-│   │   │   ├── messaging/         # Consumidores de mensagens
-│   │   │   ├── model/            # DTOs e modelos
-│   │   │   └── persistence/      # Repositórios
-│   │   └── service/              # Serviços da aplicação
+│   ├── java/
+│   │   └── com/
+│   │       └── fiap/
+│   │           └── hackaton/
+│   │               ├── core/
+│   │               │   ├── domain/
+│   │               │   │   ├── entities/       # Domain entities
+│   │               │   │   └── exceptions/     # Custom exceptions
+│   │               │   └── usecases/           # Application use cases
+│   │               ├── infrastructure/
+│   │               │   ├── gateways/           # External interface implementations
+│   │               │   ├── messaging/          # Message consumers
+│   │               │   ├── model/              # DTOs and models
+│   │               │   ├── persistence/        # Repositories
+│   │               │   └── workers/            # Processing workers
+│   │               │       └── dto/            # Data transfer objects
+│   │               └── services/               # Application services
 │   └── resources/
-│       └── application.yml       # Configurações da aplicação
+│       └── application.yml                     # Application configurations
 ```
 
 ## 🔄 Fluxo da Aplicação
@@ -168,16 +173,27 @@ spring:
   application:
     name: notification-consumer
 
-aws:
-  region: ${AWS_REGION:us-east-1}
-  sqs:
-    queue-url: ${SQS_QUEUE_URL}
-  dynamodb:
-    table-name: ${DYNAMODB_TABLE}
-
+  cloud:
+    aws:
+      credentials:
+        access-key: ${AWS_ACCESS_KEY_ID}
+        secret-key: ${AWS_SECRET_ACCESS_KEY}
+      region:
+        static: ${AWS_REGION}
+      sqs:
+        endpoint: ${SQS_ENDPOINT}
+      dynamodb:
+        endpoint: ${DYNAMO_DB_ENDPOINT}
+        table-prefix: fiap-hackaton-
+app:
+  message-broker:
+    event:
+      notification:
+        queue-name: notification-event-queue
 sendgrid:
   api-key: ${SENDGRID_API_KEY}
-  from-email: ${SENDGRID_FROM_EMAIL}
+  email:
+    from: ${SENDGRID_FROM_EMAIL}
 ```
 
 ## 🤝 Contribuições

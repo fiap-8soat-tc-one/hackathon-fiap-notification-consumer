@@ -17,6 +17,7 @@
 
     <properties>
         <java.version>21</java.version>
+        <fixture-factory.version>3.1.0</fixture-factory.version>
         <sonar.organization>fiap-8soat-tc-one</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <maven.compiler.source>${java.version}</maven.compiler.source>
@@ -44,6 +45,31 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
+
+        <!-- JUnit 5 (Jupiter) for testing -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.10.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Mockito for mocking -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>5.5.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Mockito JUnit 5 integration -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>5.5.0</version>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>io.awspring.cloud</groupId>
             <artifactId>spring-cloud-aws-starter-sqs</artifactId>
@@ -98,6 +124,19 @@
         </dependency>
 
         <dependency>
+            <groupId>br.com.six2six</groupId>
+            <artifactId>fixture-factory</artifactId>
+            <version>${fixture-factory.version}</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.thoughtworks.paranamer</groupId>
+                    <artifactId>paranamer</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
             <groupId>org.bytedeco</groupId>
             <artifactId>javacv-platform</artifactId>
             <version>1.5.9</version>
@@ -143,15 +182,12 @@
                 <version>0.8.12</version>
                 <configuration>
                     <includes>
-                        <include>com/fiap/tc/application/usecases/**/*</include>
-                        <include>com/fiap/tc/infrastructure/gateways/**</include>
-                        <include>com/fiap/tc/infrastructure/services/**</include>
-                        <include>com/fiap/tc/infrastructure/persistence/repositories/**</include>
-                        <include>com/fiap/tc/infrastructure/presentation/workers/consumers/**</include>
+                        <include>com/fiap/hackaton/core/usecases/**</include>
+                        <include>com/fiap/hackaton/infrastructure/gateways/**</include>
+                        <include>com/fiap/hackaton/infrastructure/services/**</include>
+                        <include>com/fiap/hackaton/infrastructure/persistence/repositories/**</include>
+                        <include>com/fiap/hackaton/infrastructure/presentation/workers/consumers/**</include>
                     </includes>
-                    <excludes>
-                        <exclude>com/fiap/tc/infrastructure/gateways/mappers/**/*</exclude>
-                    </excludes>
                 </configuration>
                 <executions>
                     <execution>
